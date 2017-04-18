@@ -34,3 +34,15 @@ C:\Users\74791\Desktop\FWclient\FWclient\bin\Debug\log4net.dll
 C:\Users\74791\Desktop\FWclient\FWclient\bin\Debug\PacketDotNet.xml
 C:\Users\74791\Desktop\FWclient\FWclient\bin\Debug\SharpPcap.xml
 C:\Users\74791\Desktop\FWclient\FWclient\obj\Debug\FWclient.csprojResolveAssemblyReference.cache
+D:\113-firewall-pro\FWclient\FWclient\bin\Debug\FWclient.exe.config
+D:\113-firewall-pro\FWclient\FWclient\obj\Debug\FWclient.exe
+D:\113-firewall-pro\FWclient\FWclient\obj\Debug\FWclient.pdb
+D:\113-firewall-pro\FWclient\FWclient\bin\Debug\FWclient.exe
+D:\113-firewall-pro\FWclient\FWclient\bin\Debug\FWclient.pdb
+D:\113-firewall-pro\FWclient\FWclient\bin\Debug\MySql.Data.dll
+D:\113-firewall-pro\FWclient\FWclient\bin\Debug\PacketDotNet.dll
+D:\113-firewall-pro\FWclient\FWclient\bin\Debug\SharpPcap.dll
+D:\113-firewall-pro\FWclient\FWclient\bin\Debug\log4net.dll
+D:\113-firewall-pro\FWclient\FWclient\bin\Debug\PacketDotNet.xml
+D:\113-firewall-pro\FWclient\FWclient\bin\Debug\SharpPcap.xml
+D:\113-firewall-pro\FWclient\FWclient\obj\Debug\FWclient.csprojResolveAssemblyReference.cache

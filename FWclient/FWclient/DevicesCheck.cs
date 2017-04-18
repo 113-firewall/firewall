@@ -17,29 +17,31 @@ namespace FWclient
         private static  List<FWDeviceForm> fw_list = new List<FWDeviceForm>(); //单次扫描到的防火墙设备
         private static List<string> fwMAC_list = new List<string>(); //单次扫描到的防火墙设备的MAC
                                                                      // private static int  fw_num = 1; //防火墙标识计数      
-       
+        static int listenPort = 30331;//监听的端口
+        string confirm = null;
+        UdpClient listener = new UdpClient(listenPort);
+        IPEndPoint groupEP = null; bool watch = true;
         public List<FWDeviceForm> CheckDevices(string start_IP, string end_IP)
         {
             fw_list.Clear();
             fwMAC_list.Clear();
+       
             Thread listen = new Thread(new ThreadStart(listenCheckResult));
             listen.Start();
             IDevicesScan devScan = new DevicesScan();
             int ip_num = devScan.ScanDevice(start_IP, end_IP);
             Thread.Sleep(ip_num* 5000);
 
+           
             listen.Abort();
+            listener.Close();
             return fw_list;
         }
 
         /* 监听扫描返回数据包端口 */
         public void listenCheckResult()
-        {
-            int listenPort = 30331;//监听的端口
-            string confirm = null;
-            UdpClient listener = new UdpClient(listenPort);
-            IPEndPoint groupEP = null; bool watch =true;
-                while (watch)
+        {          
+                while (true)
                 {
                     byte[] content = listener.Receive(ref groupEP);
                     confirm = Encoding.Default.GetString(content);
@@ -80,7 +82,6 @@ namespace FWclient
 #endif
                     }
                     else Console.WriteLine("未扫描到设备");
-               // watch = false;
                 }
             }
     }

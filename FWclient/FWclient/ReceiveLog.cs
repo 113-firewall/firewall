@@ -20,8 +20,11 @@ namespace FWclient
 
         public void Save_DisplayLog(bool start)
         {
-            Thread save = new Thread(new ThreadStart(SaveData));          
-            save.Start(); 
+            if (start)
+            {
+                Thread save = new Thread(new ThreadStart(SaveData));
+                save.Start();
+            }
         }
 
 
