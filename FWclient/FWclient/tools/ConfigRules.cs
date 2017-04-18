@@ -60,7 +60,7 @@ namespace FWclient
                 flag = "#";
             }
             String opc_rules_from_client_to_server0 = "iptables -A FORWARD -p tcp -s " + orf.getSrc_IP() + " -d " + orf.getDst_IP() + " --dport 135 -m state --state ESTABLISHED -j NFQUEUE --queue-num 1";
-            String opc_rules_from_client_to_server1 = "iptables -A FORWARD -p tcp -s "+ orf.getDst_IP() +"-d "+ orf.getSrc_IP();
+            String opc_rules_from_client_to_server1 = "iptables -A FORWARD -p tcp -s "+ orf.getDst_IP() +" -d "+ orf.getSrc_IP();
             String opc_rules_from_client_to_server_log= "iptables -A FORWARD -p tcp -s " + orf.getSrc_IP() + " -d " + orf.getDst_IP() + " --dport 135 -m state --state ESTABLISHED -j LOG --log-prefix "+ "\"" + "ACCEPT&OPC&ESTABLISHED " + "\"";
             //String opc_rules_from_server_to_client = "iptables -A FORWARD -p tcp -s " + orf.getDst_IP() + " -d " + orf.getSrc_IP() + " --sport 135 -m state --state ESTABLISHED -j NFQUEUE --queue-num 1";
             string rule = flag + opc_rules_from_client_to_server_log+" && "+opc_rules_from_client_to_server0 + " && "+ opc_rules_from_client_to_server1;

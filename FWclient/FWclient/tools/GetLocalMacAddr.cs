@@ -15,20 +15,20 @@ namespace FWclient
         {
             try
             {
-                string mac = "";
-                ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
-                ManagementObjectCollection moc = mc.GetInstances();
+                string mac = "94-DE-80-26-1A-B5";
+                //ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
+                //ManagementObjectCollection moc = mc.GetInstances();
 
-                foreach (ManagementObject mo in moc)
-                {
-                    if ((bool)mo["IPEnabled"] == true)
-                    {
-                        mac = mo["MacAddress"].ToString();
-                        break;
-                    }
-                }
-                moc = null;
-                mc = null;
+                //foreach (ManagementObject mo in moc)
+                //{
+                //    if ((bool)mo["IPEnabled"] == true)
+                //    {
+                //        mac = mo["MacAddress"].ToString();
+                //        break;
+                //    }
+                //}
+                //moc = null;
+                //mc = null;
                 //ManagementObjectSearcher nisc = new ManagementObjectSearcher("select * from Win32_NetworkAdapterConfiguration");
                 //foreach (ManagementObject nic in nisc.Get())
                 //{

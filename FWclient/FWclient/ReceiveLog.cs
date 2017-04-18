@@ -16,7 +16,10 @@ namespace FWclient
     public class ReceiveLog:IReceiveLog
     {
         Queue<string> real_time = new Queue<string>();
-        private int listenPort = 8000;
+        static int listenPort = 8000;
+
+        UdpClient listener = new UdpClient(listenPort);
+        IPEndPoint groupEP = null;
 
         public void Save_DisplayLog(bool start)
         {
@@ -25,6 +28,8 @@ namespace FWclient
                 Thread save = new Thread(new ThreadStart(SaveData));
                 save.Start();
             }
+            else
+            { }
         }
 
 
@@ -52,8 +57,8 @@ namespace FWclient
             string connStr = "Server=localhost;Database=firewall;Uid=root;Pwd=123456;CharSet=utf8";
             MySqlConnection con = new MySqlConnection(connStr);
             con.Open();
-            UdpClient listener = new UdpClient(listenPort);
-            IPEndPoint groupEP = null;
+        
+
             /*建立月份转换字典*/
             Dictionary<string, string> month = new Dictionary<string, string>();
             month.Add("Jan", "01"); month.Add("Feb", "02"); month.Add("Mar", "03"); month.Add("Apr", "04"); month.Add("May", "05"); month.Add("Jun", "06");

@@ -33,13 +33,18 @@ namespace FWclient
 
             //string[] code = new string[] { "01" };
             //IRulesManage test = new RulesManage();
+            //test.ChangeOPCRules("172.15.11.12","172.17.18.19","172.16.10.123",true,true);
             //test.ChangeModbusTcpRules("172.16.10.123", "172.16.10.114", "0", "100", code, "172.16.10.123", true, true);
 
             IDevicesCheck devConfirm = new DevicesCheck();
-            List<FWDeviceForm> fws = devConfirm.CheckDevices("172.16.10.46", "172.16.10.51");
+            List<FWDeviceForm> fws = devConfirm.CheckDevices("172.16.10.121", "172.16.10.124");
          
             Console.WriteLine("打印扫描结果 :");
-            
+            IResetIP res = new ResetIP();
+            if (res.ResetIP(new ProtecDeviceForm("172.16.1.123",""), "172.16.10.50"))
+                Console.WriteLine("success");
+            else
+                Console.WriteLine("fail");
 
             foreach (FWDeviceForm fw in fws)
             {
@@ -62,6 +67,8 @@ namespace FWclient
                 }
                 else Console.WriteLine("防火墙为无IP模式");
             }
+
+          
 
             //INoIPConfig inoi = new NoIPConfig();
             //if (inoi.NoipConfig(new FWDeviceForm("172.16.10.219", 22222, "", "", "")))

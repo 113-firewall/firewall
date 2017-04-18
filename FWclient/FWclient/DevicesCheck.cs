@@ -20,7 +20,7 @@ namespace FWclient
         static int listenPort = 30331;//监听的端口
         string confirm = null;
         UdpClient listener = new UdpClient(listenPort);
-        IPEndPoint groupEP = null; bool watch = true;
+        IPEndPoint groupEP = null;
         public List<FWDeviceForm> CheckDevices(string start_IP, string end_IP)
         {
             fw_list.Clear();
