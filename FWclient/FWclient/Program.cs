@@ -33,26 +33,37 @@ namespace FWclient
 
             //string[] code = new string[] { "01" };
             //IRulesManage test = new RulesManage();
-            //test.ChangeOPCRules("172.15.11.12","172.17.18.19","172.16.10.123",true,true);
-            //test.ChangeModbusTcpRules("172.16.10.123", "172.16.10.114", "0", "100", code, "172.16.10.123", true, true);
+
+            //test.ChangeModbusTcpRules("172.16.10.123", "172.16.10.114", "0", "100", 6, 800, 1000, "172.16.10.19", true, true);
+
+            //IConfigureNAT nat = new ConfigureNAT();
+
+            //if (nat.ConfigSNAT(new FWDeviceForm("172.16.10.19", 2222, "", "", ""), "192.168.1.239", "192.168.1.2", true))
+            //{
+            //    Console.WriteLine("NAT config success");
+            //}
+            //else
+            //    Console.WriteLine("NAT config failed");
+
 
             IDevicesCheck devConfirm = new DevicesCheck();
-            List<FWDeviceForm> fws = devConfirm.CheckDevices("172.16.10.121", "172.16.10.124");
+            List<FWDeviceForm> fws = devConfirm.CheckDevices("172.16.10.32", "172.16.10.34");
          
             Console.WriteLine("打印扫描结果 :");
-            IResetIP res = new ResetIP();
-            if (res.ResetIP(new ProtecDeviceForm("172.16.1.123",""), "172.16.10.50"))
-                Console.WriteLine("success");
-            else
-                Console.WriteLine("fail");
-
+            //IResetIP res = new ResetIP();
+            //if (res.ResetIP(new ProtecDeviceForm("172.16.1.123",""), "172.16.10.50"))
+            //    Console.WriteLine("success");
+            //else
+            //    Console.WriteLine("fail");
+           
             foreach (FWDeviceForm fw in fws)
             {
                 string fwip = fw.getDev_IP();
-                string fwmac = fw.getFw_mac();
+                string fwmac = fw.getDev_MAC();
                 List<ProtecDeviceForm> protecDev_list = fw.getProtecDev_list();
 
                 Console.WriteLine("防火墙设备IP : {0} 防火墙设备MAC : {1}", fwip, fwmac);
+               
                 Console.WriteLine("关联的受保护设备 :");
 
                 if (fwip != "0.0.0.0")
@@ -68,7 +79,7 @@ namespace FWclient
                 else Console.WriteLine("防火墙为无IP模式");
             }
 
-          
+           
 
             //INoIPConfig inoi = new NoIPConfig();
             //if (inoi.NoipConfig(new FWDeviceForm("172.16.10.219", 22222, "", "", "")))

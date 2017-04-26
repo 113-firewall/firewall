@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using SharpPcap;
 using PacketDotNet;
 using FWclient;
+using FWclient.forms;
 
 namespace FWclient
 {
@@ -88,6 +89,7 @@ namespace FWclient
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.ToString());
                 config_info_confirm = false;
             }
             finally

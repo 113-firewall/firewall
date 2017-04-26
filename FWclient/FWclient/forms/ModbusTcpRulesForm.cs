@@ -13,11 +13,12 @@ namespace FWclient
     {
         private String dst_IP;
         private String src_IP;
-        private String min_addr;
-        private String max_addr;
-        private long lfc_flag = 0;
-        private long hfc_flag = 0;
-        private string[] function_code_select;
+        private String Min_addr;
+        private String Max_addr;
+        private int Min_data;
+        private int Max_data;
+        private int func;
+       // private string[] function_code_select;
         private bool value_select = false;
 
         public bool getValue_select()
@@ -37,55 +38,53 @@ namespace FWclient
 
         public String getMin_addr()
         {
-            return min_addr;
+            return Min_addr;
         }
 
         public String getMax_addr()
         {
-            return max_addr;
+            return Max_addr;
         }
 
-        public long getLfc_flag()
+        public int getfunc()
         {
-            return lfc_flag;
+            return func;
         }
 
-        public long getHfc_flag()
+        public int getMin_data()
         {
-            return hfc_flag;
-        }
+            return Min_data;
 
-        public string [] getFunction_code_select()
+        }
+        public int getMax_data()
         {
-            return function_code_select;
-        }
+            return Max_data;
 
-        public void setLfc_flag(long lfc_flag)
-        {
-            this.lfc_flag = lfc_flag;
         }
+        //public string [] getFunction_code_select()
+        //{
+        //    return function_code_select;
+        //}
 
-        public void setHfc_flag(long hfc_flag)
-        {
-            this.hfc_flag = hfc_flag;
-        }
-
-        public void setIP_Addr_Funcode(string dst_IP, string src_IP, String min_addr, String max_addr, string[] function_code_select)
+        public void setIP_Addr_Funcode(string dst_IP, string src_IP, String Min_addr, String Max_addr,int func,int Min_data,int Max_data)
         {
             this.dst_IP = dst_IP;
             this.src_IP = src_IP;
-            this.min_addr = min_addr;
-            this.max_addr = max_addr;
-
-            if (function_code_select[0] != null)
-            {
-                this.function_code_select = function_code_select;
-                value_select = true;
-            }
-            else
-            {
-                value_select = false;
-            }
+            this.Min_addr = Min_addr;
+            this.Max_addr = Max_addr;
+            this.func = func;
+            this.Min_data = Min_data;
+            this.Max_data = Max_data;
+    
+            //if (function_code_select[0] != null)
+            //{
+            //    this.function_code_select = function_code_select;
+            //    value_select = true;
+            //}
+            //else
+            //{
+            //    value_select = false;
+            //}
         }
     }
 }

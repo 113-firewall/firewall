@@ -20,7 +20,7 @@ namespace FWclient
         /// <param name="dev_IP">防火墙设备IP地址</param>
         /// <param name="log_record">是否记录日志</param>
         /// <param name="add_delete">添加规则或者删除规则(值为true时添加规则)</param>
-        bool ChangeModbusTcpRules(string dst_IP, string src_IP, string min_addr, string max_addr, string[] function_code_select, string dev_IP, bool log_record,bool add_delete);
+        bool ChangeModbusTcpRules(string dst_IP, string src_IP, string min_addr, string max_addr, int func,int min_data,int max_data ,string dev_IP, bool log_record,bool add_delete);
 
         /// <summary>
         /// 添加OPC规则

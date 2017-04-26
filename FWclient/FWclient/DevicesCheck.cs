@@ -31,7 +31,7 @@ namespace FWclient
             IDevicesScan devScan = new DevicesScan();
             int ip_num = devScan.ScanDevice(start_IP, end_IP);
             Thread.Sleep(ip_num* 5000);
-
+           
            
             listen.Abort();
             listener.Close();
@@ -58,30 +58,32 @@ namespace FWclient
 
                         if (fw_IP != "0.0.0.0" && (fwMAC_list.Contains(fw_mac)))    //如果已经存在
                         {
-                            foreach (FWDeviceForm fwdev in fw_list)
+                        foreach (FWDeviceForm fwdev in fw_list)
+                        {
+                            if (fwdev.getDev_MAC() == fw_mac)
                             {
-                                if (fwdev.getFw_mac() == fw_mac)
+                                if (!fwdev.getProtecDevIP_list().Contains(dev_IP))
                                 {
-                                    if (!fwdev.getProtecDevIP_list().Contains(dev_IP))
-                                    {
-                                        ProtecDeviceForm protecDev = new ProtecDeviceForm(dev_IP, dev_mac);
-                                        fwdev.addProtecDev(protecDev);
-                                        fwdev.addProtecDevIP(dev_IP);
-                                    }
+                                    ProtecDeviceForm protecDev = new ProtecDeviceForm(dev_IP, dev_mac);
+                                    fwdev.addProtecDev(protecDev);
+                                    fwdev.addProtecDevIP(dev_IP);
                                 }
                             }
                         }
-                        else
-                        {
-                            FWDeviceForm fw_dev = new FWDeviceForm(fw_IP, 22222, fw_mac, dev_IP, dev_mac);
-                            fwMAC_list.Add(fw_mac);
-                            fw_list.Add(fw_dev);
-                        }
-#if debug
-                        Console.WriteLine("保存设备信息！！！");
-#endif
                     }
-                    else Console.WriteLine("未扫描到设备");
+                    else
+                    {
+                        FWDeviceForm fw_dev = new FWDeviceForm(fw_IP, 22222, fw_mac);
+                        fw_dev.addProtecDev(new ProtecDeviceForm(dev_IP, dev_mac));
+                        fw_dev.addProtecDevIP(dev_IP);
+                        fwMAC_list.Add(fw_mac);
+                        fw_list.Add(fw_dev);
+                    }
+#if debug
+                    Console.WriteLine("保存设备信息！！！");
+#endif
+                }
+                else Console.WriteLine("未扫描到设备");
                 }
             }
     }

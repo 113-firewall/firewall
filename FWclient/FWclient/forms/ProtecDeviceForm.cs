@@ -12,12 +12,12 @@ namespace FWclient.forms
         private string dev_MAC;
         private string dev_type;
 
-        public ProtecDeviceForm(string dev_IP, string dev_MAC):base(dev_IP)
+        public ProtecDeviceForm(string dev_IP, string dev_MAC):base(dev_IP, dev_MAC)
         {
             this.dev_MAC = dev_MAC;
         }
 
-        public string getDev_MAC()
+        public new string getDev_MAC()
         {
             return dev_MAC;
         }
@@ -26,7 +26,7 @@ namespace FWclient.forms
         {
             string[] macArray = dev_MAC.Split(':');
             string macQuery = macArray[0] + "-" + macArray[1] + "-" + macArray[2];
-            string connStr = "Server=localhost;Database=macs;Uid=root;Pwd=123456;CharSet=utf8";
+            string connStr = "Server=localhost;Database=firewall;Uid=root;Pwd=;CharSet=utf8";
             string sqlSearch = "select Manufacturers from macs where Macs="+"'"+ macQuery + "'";
             MySqlConnection con = new MySqlConnection(connStr);
             MySqlCommand cmd = new MySqlCommand(sqlSearch, con);

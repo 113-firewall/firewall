@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigureNAT.cs" />
     <Compile Include="DevicesCheck.cs" />
     <Compile Include="forms\DeviceForm.cs" />
     <Compile Include="forms\DNP3RulesForm.cs" />
@@ -59,28 +60,29 @@
     <Compile Include="forms\OPCRulesForm.cs" />
     <Compile Include="forms\ProtecDeviceForm.cs" />
     <Compile Include="forms\WhiteLists.cs" />
+    <Compile Include="Interfaces\IConfigureNAT.cs" />
     <Compile Include="Interfaces\IDevicesCheck.cs" />
     <Compile Include="Interfaces\INoIPConfig.cs" />
     <Compile Include="Interfaces\IReceiveLog.cs" />
     <Compile Include="Interfaces\IResetIP.cs" />
     <Compile Include="Interfaces\IRulesManage.cs" />
-    <Compile Include="ReceiveLog.cs" />
     <Compile Include="NoIPConfig.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReceiveLog.cs" />
     <Compile Include="ResetIP.cs" />
+    <Compile Include="Interfaces\IConfigRules.cs" />
+    <Compile Include="Interfaces\IDevicesScan.cs" />
     <Compile Include="RulesManage.cs" />
     <Compile Include="tools\ConfigRules.cs" />
     <Compile Include="tools\DevicesScan.cs" />
     <Compile Include="tools\GetLocalMacAddr.cs" />
-    <Compile Include="Interfaces\IConfigRules.cs" />
-    <Compile Include="Interfaces\IDevicesScan.cs" />
-    <Compile Include="tools\RulesDataProcess.cs" />
     <Compile Include="tools\SendInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

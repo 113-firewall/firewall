@@ -30,10 +30,10 @@ namespace FWclient
             return  configDevice.ConfigDNP3Rules(dnp3rf,add_delete);
         }
 
-        public bool ChangeModbusTcpRules(string dst_IP, string src_IP, string min_addr, string max_addr, string[] function_code_select, string dev_IP, bool log_record, bool add_delete)
+        public bool ChangeModbusTcpRules(string dst_IP, string src_IP, string min_addr, string max_addr, int func, int Min_data,int Max_data, string dev_IP, bool log_record, bool add_delete)
         {
             ModbusTcpRulesForm mtrf = new ModbusTcpRulesForm();
-            mtrf.setIP_Addr_Funcode(dst_IP, src_IP, min_addr, max_addr, function_code_select);
+            mtrf.setIP_Addr_Funcode(dst_IP, src_IP, min_addr, max_addr, func, Min_data, Max_data);
 
             DeviceForm devform = new DeviceForm(dev_IP, 22222);
 

@@ -14,6 +14,6 @@ namespace FWclient
     /// <param name="BindIP">设置防火墙IP</param>
     interface IResetIP
     {
-        bool ResetIP(ProtecDeviceForm fw_dev,string BindIP);
+        bool ResetIP(ProtecDeviceForm fw_dev,string BvindIP);
     }
 }
