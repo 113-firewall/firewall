@@ -1,7 +1,7 @@
 ﻿#define debug
 
 using FWclient;
-using FWclient.forms;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,13 +32,20 @@ namespace FWclient
             //}
 
             //string[] code = new string[] { "01" };
+
+            //IResetIP res = new ResetIP();
+            //if (res.ResetIP(new ProtecDeviceForm("172.16.10.19", ""), "172.16.10.19"))
+            //    Console.WriteLine("success");
+            //else
+            //    Console.WriteLine("fail");
+
             //IRulesManage test = new RulesManage();
 
-            //test.ChangeModbusTcpRules("172.16.10.123", "172.16.10.114", "0", "100", 6, 800, 1000, "172.16.10.19", true, true);
+            //test.ChangeModbusTcpRules("any", "any", "12292", "12292", 6, 1000, 2000, "172.16.10.219", true, true);
 
             //IConfigureNAT nat = new ConfigureNAT();
 
-            //if (nat.ConfigSNAT(new FWDeviceForm("172.16.10.19", 2222, "", "", ""), "192.168.1.239", "192.168.1.2", true))
+            //if (nat.ConfigSNAT(new FWDeviceForm("172.16.10.19", 2222, ""),"eth3", "192.168.1.239", "192.168.1.2", false))
             //{
             //    Console.WriteLine("NAT config success");
             //}
@@ -47,15 +54,13 @@ namespace FWclient
 
 
             IDevicesCheck devConfirm = new DevicesCheck();
-            List<FWDeviceForm> fws = devConfirm.CheckDevices("172.16.10.32", "172.16.10.34");
+            List<FWDeviceForm> fws = devConfirm.CheckDevices("172.16.10.16", "172.16.10.20");
          
             Console.WriteLine("打印扫描结果 :");
-            //IResetIP res = new ResetIP();
-            //if (res.ResetIP(new ProtecDeviceForm("172.16.1.123",""), "172.16.10.50"))
-            //    Console.WriteLine("success");
-            //else
-            //    Console.WriteLine("fail");
-           
+
+            IRulesManage list = new RulesManage();
+            list.ChangeWhiteLists("172.19.18.119","123.23.43.34","172.16.10.19","525","502",true,true); 
+
             foreach (FWDeviceForm fw in fws)
             {
                 string fwip = fw.getDev_IP();

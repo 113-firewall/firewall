@@ -8,10 +8,10 @@ namespace FWclient
 {
     class ResetIP:IResetIP
     {
-        bool IResetIP.ResetIP(forms.ProtecDeviceForm fw_dev,string BindIP)
+        bool IResetIP.ResetIP(ProtecDeviceForm fw_dev,string BindIP)
         {
            
-            string cmd = "ifconfig br0 " +BindIP+" up";
+            string cmd = "ifconfig br0 down && ifconfig br0 " +BindIP+" up";
             Console.WriteLine("{0}",cmd);
             fw_dev.setDev_port(22222);
             SendInfo sendResetcmd = new SendInfo(fw_dev);

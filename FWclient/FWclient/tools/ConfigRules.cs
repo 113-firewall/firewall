@@ -1,4 +1,4 @@
-﻿using FWclient.forms;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ namespace FWclient
     /// </summary>
     class ConfigRules : IConfigRules
     {
-        private String default_rules = "iptables -P FORWARD  DROP";
+       // private String default_rules = "iptables -P FORWARD  DROP";
         private DeviceForm devform;
 
         public ConfigRules(DeviceForm devform)
@@ -27,7 +27,7 @@ namespace FWclient
            // RulesDataProcess.ModbusTcpRulesDataProcess(mtrf);
 
             String dpi_pro = "modbusTcp";
-            string flag=null;
+            string flag=null; string dpi_rules_from_master_to_slave0 = null;
             if (add_delete == true)
             {
                  flag = "$";
@@ -37,11 +37,31 @@ namespace FWclient
             {
                 flag = "#";
             }
-            string  dpi_rules_from_master_to_slave0 = "iptables" + " -A" + " " + "FORWARD" + " " + "-p tcp" + " " + "--dport" + " " + "502" + " " + "-s " + mtrf.getSrc_IP() + " " + "-d" + " " + mtrf.getDst_IP() + " " + "-m" + " " + dpi_pro + " " + "--data-addr" + " " + mtrf.getMin_addr() + ":" + mtrf.getMax_addr() + " " + "--modbus-func "+mtrf.getfunc()+" "+"--modbus-data "+mtrf.getMin_data()+":"+mtrf.getMax_data()+" -j" + " " + " ACCEPT";
-            string dpi_rules_from_master_to_slave1 = "iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT";
-            string dpi_rules_from_master_to_slave_log= "iptables" + " -A" + " " + "FORWARD" + " " + "-p tcp" + " " + "--dport" + " " + "502" + " " + "-s " + mtrf.getSrc_IP() + " " + "-d" + " " + mtrf.getDst_IP() + " " + "-m" + " " + dpi_pro + " " + "--data-addr" + " " + mtrf.getMin_addr() +":"+ mtrf.getMax_addr() + " " + "--modbus-func " + mtrf.getfunc() + " "+"--modbus-data " + mtrf.getMin_data() + ":" + mtrf.getMax_data() + " -j" + " " + "LOG" + " " + "--log-prefix " + "\"" + "ACCEPT&modbusTCP&code_legal " + "\"";
-            string rule = flag +default_rules+" && "+ dpi_rules_from_master_to_slave_log+" && "+ dpi_rules_from_master_to_slave0 + " && " + dpi_rules_from_master_to_slave1;
-            
+            if (mtrf.getSrc_IP() == "any" & mtrf.getDst_IP() == "any")
+            {
+
+                dpi_rules_from_master_to_slave0 = "iptables" + " -A" + " " + "FORWARD" + " " + "-p tcp" + " " + "--dport" + " " + "502" + " " + "-m" + " " + dpi_pro + " " + "--data-addr" + " " + mtrf.getMin_addr() + ":" + mtrf.getMax_addr() + " " + "--modbus-func " + mtrf.getfunc() + " " + "--modbus-data " + mtrf.getMin_data() + ":" + mtrf.getMax_data() + " -j" + " " + "DROP";
+            }
+            else if (mtrf.getSrc_IP() == "any" & mtrf.getDst_IP() != "any")
+            {
+                dpi_rules_from_master_to_slave0 = "iptables" + " -A" + " " + "FORWARD" + " " + "-p tcp" + " " + "--dport" + " " + "502" + " " + "-d" + " " + mtrf.getDst_IP() + " " + "-m" + " " + dpi_pro + " " + "--data-addr" + " " + mtrf.getMin_addr() + ":" + mtrf.getMax_addr() + " " + "--modbus-func " + mtrf.getfunc() + " " + "--modbus-data " + mtrf.getMin_data() + ":" + mtrf.getMax_data() + " -j" + " " + "DROP";
+
+            }
+            else if (mtrf.getSrc_IP() != "any" & mtrf.getDst_IP() == "any")
+            {
+                dpi_rules_from_master_to_slave0 = "iptables" + " -A" + " " + "FORWARD" + " " + "-p tcp" + " " + "--dport" + " " + "502" + " " + "-s " + mtrf.getSrc_IP() + " "  + "-m" + " " + dpi_pro + " " + "--data-addr" + " " + mtrf.getMin_addr() + ":" + mtrf.getMax_addr() + " " + "--modbus-func " + mtrf.getfunc() + " " + "--modbus-data " + mtrf.getMin_data() + ":" + mtrf.getMax_data() + " -j" + " " + "DROP";
+            }
+            else
+            {
+
+                dpi_rules_from_master_to_slave0 = "iptables" + " -A" + " " + "FORWARD" + " " + "-p tcp" + " " + "--dport" + " " + "502" + " " + "-s " + mtrf.getSrc_IP() + " " + "-d" + " " + mtrf.getDst_IP() + " " + "-m" + " " + dpi_pro + " " + "--data-addr" + " " + mtrf.getMin_addr() + ":" + mtrf.getMax_addr() + " " + "--modbus-func " + mtrf.getfunc() + " " + "--modbus-data " + mtrf.getMin_data() + ":" + mtrf.getMax_data() + " -j" + " " + " DROP";
+            }
+            //string dpi_rules_from_master_to_slave1 = "iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT";
+            //string dpi_rules_from_master_to_slave_log= "iptables" + " -A" + " " + "FORWARD" + " " + "-p tcp" + " " + "--dport" + " " + "502" + " " + "-s " + mtrf.getSrc_IP() + " " + "-d" + " " + mtrf.getDst_IP() + " " + "-m" + " " + dpi_pro + " " + "--data-addr" + " " + mtrf.getMin_addr() +":"+ mtrf.getMax_addr() + " " + "--modbus-func " + mtrf.getfunc() + " "+"--modbus-data " + mtrf.getMin_data() + ":" + mtrf.getMax_data() + " -j" + " " + "LOG" + " " + "--log-prefix " + "\"" + "DROP&modbusTCP&data_illegal " + "\"";
+            string rule = flag + dpi_rules_from_master_to_slave0;
+
+            Console.WriteLine("{0}",rule);
+
             SendInfo sendcmd = new SendInfo(devform);
             
             return sendcmd.SendConfigInfo(rule);
@@ -105,9 +125,10 @@ namespace FWclient
             {
                 flag = "#";
             }
-            string whiteList_from_client_to_server0 = "iptables -A FORWARD -p tcp -s"+wl.getSrc_IP()+"--dport"+wl.getPort();
+            string whiteList_from_client_to_server0 = "iptables -A FORWARD -p tcp -s " + wl.getsrc_IP() + " -d " + wl.getdst_IP() + " --sport " + wl.getsrc_port()
+                + " --dport " + wl.getdst_port() + " -j ACCEPT ";
            // string whiteList_from_client_to_server1 = "iptables -A FORWARD -p tcp -d" + wl.getSrc_IP() + "--sport" + wl.getPort();
-            string changewl = flag+" && "+whiteList_from_client_to_server0 ;
+            string changewl = flag+whiteList_from_client_to_server0 ;
 
             SendInfo sendcmd = new SendInfo(devform);           
             return sendcmd.SendConfigInfo(changewl);

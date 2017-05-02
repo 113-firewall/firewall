@@ -11,23 +11,37 @@ namespace FWclient
     /// </summary>
     class WhiteLists
     {
+        private string dst_IP;
         private string src_IP;
-        private string port;
+        private string dst_port;
+        private string src_port;
 
-        public void setsrc_IPAndPort(string src_IP, string port)
+        public void setIPAndPort(string dst_IP,string src_IP,string dst_port, string src_port)
         {
+            this.dst_IP = dst_IP;
             this.src_IP = src_IP;
-            this.port= port;
+            this.dst_port = dst_port;
+            this.src_port = src_port;
         }
 
-        public string getSrc_IP()
+        public string getdst_IP()
+        {
+            return dst_IP;
+        }
+
+        public string getsrc_IP()
         {
             return src_IP;
         }
 
-        public string getPort()
+        public string getdst_port()
         {
-            return port;
+            return dst_port;
+        }
+
+        public string getsrc_port()
+        {
+            return src_port;
         }
 
     }

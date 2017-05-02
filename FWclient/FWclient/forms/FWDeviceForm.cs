@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FWclient.forms
+namespace FWclient
 {
     /// <summary>
     /// 防火墙设备

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FWclient.forms;
 
 namespace FWclient
 {
@@ -11,11 +10,9 @@ namespace FWclient
     {
         private string devIP;
         private string EthIP;
-        public bool ConfigSNAT(FWDeviceForm fw_dev, string devIP, string EthIP, bool add_delete)
+        public bool ConfigSNAT(FWDeviceForm fw_dev,string EthName, string devIP, string EthIP, bool add_delete)
         {
-            string flag = "";string configEth_bridge = "";string configInfo = ""; string configEth_IP = "";
-            
-            string EthName="eth3";//设备连接到的网口,（获取没做)
+            string flag = "";string configEth_bridge = "";string configInfo = ""; string configEth_IP = "";           
             string rule = "iptables -t nat -A POSTROUTING -s " + devIP + " -o br0 -j SNAT --to-source " + fw_dev.getDev_IP();
             if (add_delete)
             {

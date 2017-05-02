@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -51,5 +52,17 @@ namespace FWclient
             IConfigRules configDevice = new ConfigRules(devform);
             return  configDevice.ConfigOPCRules(orf,add_delete);
         }
+
+        public bool ChangeWhiteLists(string dst_IP, string src_IP, string dev_IP,string dst_port, string src_port, bool log_record, bool add_delete)
+        {
+            WhiteLists lists = new WhiteLists();
+            lists.setIPAndPort(dst_IP,src_IP,dst_port,src_port);
+
+            DeviceForm devform = new DeviceForm(dev_IP, 22222);
+            IConfigRules configDevice = new ConfigRules(devform);
+            return configDevice.ConfigWhiteLists(lists,add_delete);
+
+        }
+
     }
 }
